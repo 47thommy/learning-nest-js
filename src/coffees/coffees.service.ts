@@ -1,4 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { Coffee } from './entities/coffee.entity';
 
 @Injectable()
@@ -40,7 +45,18 @@ export class CoffeesService {
     return this.coffees;
   }
   findOne(id: string) {
-    return this.coffees.find((coffee) => coffee.id === +id);
+    const coffee = this.coffees.find((coffee) => coffee.id === +id);
+    if (!coffee) {
+      // to handle errors we can use either the httpException class or the custom error classes provided by nest js
+
+      //   throw new HttpException(
+      //     `coffe #${id} does not exist`,
+      //     HttpStatus.NOT_FOUND,
+      //   );
+
+      throw new NotFoundException(`coffe #${id} does not exist`);
+    }
+    return coffee;
   }
   create(createCoffeeDto: any) {
     this.coffees.push(createCoffeeDto);
