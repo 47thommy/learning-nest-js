@@ -3,7 +3,7 @@ import { Coffee } from './entities/coffee.entity';
 
 @Injectable()
 export class CoffeesService {
-  private coffes: Coffee[] = [
+  private coffees: Coffee[] = [
     {
       id: 1,
       name: 'Espresso',
@@ -35,4 +35,26 @@ export class CoffeesService {
       flavors: ['Chocolate', 'Sweet', 'Smooth'],
     },
   ];
+
+  findAll() {
+    return this.coffees;
+  }
+  findOne(id: string) {
+    return this.coffees.find((coffee) => coffee.id === +id);
+  }
+  create(createCoffeeDto: any) {
+    this.coffees.push(createCoffeeDto);
+  }
+  update(id: string, updateCoffeeDto: any) {
+    const existingCofee = this.findOne(id);
+    if (existingCofee) {
+      //update the cofee
+    }
+  }
+  remove(id: string) {
+    const coffeeIndex = this.coffees.findIndex((coffee) => coffee.id === +id);
+    if (coffeeIndex >= 0) {
+      return this.coffees.splice(coffeeIndex, 1);
+    }
+  }
 }
