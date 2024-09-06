@@ -50,10 +50,17 @@ export class CoffeesService {
     private readonly cofeeRepository: Repository<Coffee>,
   ) {}
   findAll() {
-    return this.cofeeRepository.find();
+    return this.cofeeRepository.find({
+      relations: {
+        flavors: true,
+      },
+    });
   }
   async findOne(id: string) {
-    const coffee = await this.cofeeRepository.findOne({ where: { id: +id } });
+    const coffee = await this.cofeeRepository.findOne({
+      where: { id: +id },
+      relations: { flavors: true },
+    });
     if (!coffee) {
       // to handle errors we can use either the httpException class or the custom error classes provided by nest js
 
