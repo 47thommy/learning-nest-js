@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Coffee } from './entities/coffee.entity';
 import { Flavor } from './entities/flavor.entity';
 import { Event } from 'src/events/entities/event.entity/event.entity';
+import { coffeeBrands } from './coffee.constants';
 
 class mockCoffeeSercice {}
 @Module({
@@ -12,8 +13,8 @@ class mockCoffeeSercice {}
   controllers: [CoffeesController],
   providers: [
     {
-      provide: CoffeesService,
-      useValue: mockCoffeeSercice,
+      provide: coffeeBrands,
+      useValue: ['capuchino', 'latte', 'mocha', 'americano', 'cortado'],
     },
   ],
   exports: [CoffeesService],
