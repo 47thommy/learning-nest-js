@@ -5,12 +5,18 @@ import { CoffeesModule } from './coffees/coffees.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CoffeeRatingModule } from './coffee-rating/coffee-rating.module';
 import { ConfigModule } from '@nestjs/config';
+import * as Joi from '@hapi/joi';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       // envFilePath:".envrionmet" to specify a different path, by default the config module looks for .env file in the root directory
       // ignoreEnvFile: true, later when we deploy our app .env will not be used so we can tell the config module not to load it
+
+      validationSchema: Joi.object({
+        DATABASE_HOST: Joi.required(),
+        DATABASE_PORT: Joi.number().default(5432),
+      }),
     }),
     CoffeesModule,
     TypeOrmModule.forRoot({
