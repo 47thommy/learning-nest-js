@@ -6,6 +6,7 @@ import { Coffee } from './entities/coffee.entity';
 import { Flavor } from './entities/flavor.entity';
 import { Event } from 'src/events/entities/event.entity/event.entity';
 import { coffeeBrands } from './coffee.constants';
+import { Connection } from 'typeorm';
 
 class configService {}
 class developmentConfigService {}
@@ -25,8 +26,13 @@ class CoffeBrandsFactory {
     CoffeBrandsFactory,
     {
       provide: coffeeBrands,
-      useFactory: (coffeeBrandsFactory: CoffeBrandsFactory) => {
-        return coffeeBrandsFactory.create();
+      useFactory: async (connection: Connection): Promise<string[]> => {
+        const coffeeBRands = await Promise.resolve([
+          'capuchino',
+          'latte',
+          '47',
+        ]);
+        return coffeeBRands;
       },
       inject: [CoffeBrandsFactory],
     },
