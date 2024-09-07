@@ -7,11 +7,11 @@ import { Flavor } from './entities/flavor.entity';
 import { Event } from 'src/events/entities/event.entity/event.entity';
 import { coffeeBrands } from './coffee.constants';
 
-class mockCoffeeSercice {}
 @Module({
   imports: [TypeOrmModule.forFeature([Coffee, Flavor, Event])],
   controllers: [CoffeesController],
   providers: [
+    CoffeesService,
     {
       provide: coffeeBrands,
       useValue: ['capuchino', 'latte', 'mocha', 'americano', 'cortado'],
