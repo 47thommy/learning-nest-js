@@ -15,6 +15,7 @@ import { Flavor } from './entities/flavor.entity';
 import { PaginationQueryDto } from 'src/common/dto/pagination-query.dto/pagination-query.dto';
 import { Event } from 'src/events/entities/event.entity/event.entity';
 import { coffeeBrands } from './coffee.constants';
+import { ConfigService } from '@nestjs/config';
 @Injectable()
 export class CoffeesService {
   constructor(
@@ -23,9 +24,14 @@ export class CoffeesService {
     @InjectRepository(Flavor)
     private readonly flavorRepository: Repository<Flavor>,
     private readonly dataSource: DataSource,
+    private readonly configService: ConfigService,
     @Inject(coffeeBrands) coffeeBrands: string[],
   ) {
-    console.log('cofeeService instance created');
+    // const databaseHost = this.configService.get<string>(
+    //   'DATABASE_HOST',
+    //   'localhost',
+    // ); if the database host is not provided we can set a default one by using the second argument of the get method
+    // console.log(databaseHost);
   }
 
   findAll(queryParams: PaginationQueryDto) {
