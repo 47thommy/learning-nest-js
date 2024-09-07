@@ -8,7 +8,10 @@ import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      // envFilePath:".envrionmet" to specify a different path, by default the config module looks for .env file in the root directory
+      // ignoreEnvFile: true, later when we deploy our app .env will not be used so we can tell the config module not to load it
+    }),
     CoffeesModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
