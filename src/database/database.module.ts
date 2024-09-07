@@ -1,5 +1,6 @@
 import { DynamicModule, Module } from '@nestjs/common';
 import { DataSource, DataSourceOptions } from 'typeorm';
+import { connectionToken } from './database.constants';
 
 @Module({})
 export class DatabaseModule {
@@ -8,7 +9,7 @@ export class DatabaseModule {
       module: DatabaseModule,
       providers: [
         {
-          provide: 'CONNECTON',
+          provide: connectionToken,
           useValue: new DataSource(options),
         },
       ],
