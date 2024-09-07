@@ -27,10 +27,8 @@ export class CoffeesService {
     private readonly configService: ConfigService,
     @Inject(coffeeBrands) coffeeBrands: string[],
   ) {
-    // const databaseHost = this.configService.get<string>(
-    //   'DATABASE_HOST',
-    //   'localhost',
-    // ); if the database host is not provided we can set a default one by using the second argument of the get method
+    // const databaseHost = this.configService.get('database.host', 'thomas');
+    // if the database host is not provided we can set a default one by using the second argument of the get method
     // console.log(databaseHost);
   }
 
